@@ -3,27 +3,20 @@ import random, os, shutil
 # random.shuffle(l)
 
 # print(len(l))
-# for i in range(30000):
+# for i in range(35000):
     # if (not ("train" in l[i]) and not ("test" in l[i])):
-        # shutil.move('./clothing/' + l[i], './clothing/train/' + l[i])
+        # shutil.move('./clothing/' + l[i], './train/clothing/' + l[i])
 
-# for i in range(30001, 44444):
+# for i in range(35001, 44442):
     # if (not ("train" in l[i]) and not ("test" in l[i])):
-        # shutil.move('./clothing/' + l[i], './clothing/test/' + l[i])
-
-# print(l[0:4])
+        # shutil.move('./clothing/' + l[i], './test/clothing/' + l[i])
 
 
 def getListOfFiles(dirName):
-    # create a list of file and sub directories 
-    # names in the given directory 
     listOfFile = os.listdir(dirName)
     allFiles = list()
-    # Iterate over all the entries
     for entry in listOfFile:
-        # Create full path
         fullPath = os.path.join(dirName, entry)
-        # If entry is a directory then get the list of files in this directory 
         if os.path.isdir(fullPath):
             allFiles = allFiles + getListOfFiles(fullPath)
         else:
@@ -31,16 +24,12 @@ def getListOfFiles(dirName):
                 
     return allFiles
 
-train_cifar = getListOfFiles("./train")
-test_cifar = getListOfFiles("./test")
+# train_cifar = getListOfFiles("./train_cf")
+test_cifar = getListOfFiles("./test_cf")
 
 # for x in train_cifar:
-    # print('./not_clothing/train/' + x.split("/")[-2] + x.split("/")[-1])
-    # shutil.move(x, './not_clothing/train/' + x.split("/")[-2] + x.split("/")[-1])
+    # shutil.move(x, './train/other/' + x.split("/")[-2] + x.split("/")[-1])
 
 for x in test_cifar:
-    # print('./not_clothing/train/' + x.split("/")[-2] + x.split("/")[-1])
-    shutil.move(x, './not_clothing/test/' + x.split("/")[-2] + x.split("/")[-1])
+    shutil.move(x, './test/other/' + x.split("/")[-2] + x.split("/")[-1])
 
-# print(len(train_cifar))
-# print(train_cifar[0].split("/"))
